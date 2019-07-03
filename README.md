@@ -8,7 +8,7 @@ This workflow shows Symantec Threat Intelligence about URL's by using the Symant
 
 3. Install the API key with the **tesetkey api-key** command
 ![tesetkey](https://raw.githubusercontent.com/coolhva/alfred-symantec-threat-explorer/master/screenshots/te_set_key.png)
-After hitting enter the api key will be saved and you will be notified
+After hitting enter the api key will be saved in your **keychain** and you will be notified
 ![tekeyst](https://github.com/coolhva/alfred-symantec-threat-explorer/blob/master/screenshots/te_api_key_saved.png)
 
 4. Query a domain name (**te symantec.com**)

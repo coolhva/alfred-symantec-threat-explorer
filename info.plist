@@ -53,7 +53,7 @@
 	<key>description</key>
 	<string>Retrieve threat intelligence from TEx</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>Symantec Threat Explorer</string>
 	<key>objects</key>
@@ -235,7 +235,7 @@
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>0.1</string>
+	<string>0.2</string>
 	<key>webaddress</key>
 	<string>https://www.vanachterberg.org/</string>
 </dict>

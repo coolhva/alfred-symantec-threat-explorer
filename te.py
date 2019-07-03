@@ -88,6 +88,12 @@ def main(wf):
 
     log.debug('Started')
 
+    if wf.update_available:
+        wf.add_item('New version available',
+                    'Install the update',
+                    autocomplete='workflow:update',
+                    icon=ICON_INFO)
+
     import validators
 
     # build argument parser to parse script args and collect their values
@@ -205,7 +211,7 @@ def main(wf):
     wf.send_feedback()
 
 if __name__ == u"__main__":
-    wf = Workflow(libraries=['./lib'])
+    wf = Workflow(libraries=['./lib'],update_settings={'github_slug': 'coolhva/alfred-symantec-threat-explorer'})
     wf = Workflow()
     log = wf.logger
     sys.exit(wf.run(main))

@@ -1,0 +1,1 @@
+# alfred-symantec-threat-explorer

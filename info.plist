@@ -232,8 +232,10 @@
 			<integer>195</integer>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>0.1</string>
+	<string>0.2</string>
 	<key>webaddress</key>
 	<string>https://www.vanachterberg.org/</string>
 </dict>

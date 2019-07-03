@@ -32,12 +32,18 @@ class IpAddress:
     def __init__(self,geolocation,ipAddress):
         self.geoLocation = geolocation
         self.ipAddress = ipAddress
+        
+class Error:
+    def __init__(self, code, msg):
+        self.code = code
+        self.msg = msg
 
 class ThreatIntel:
     url = None
     categories = []
     riskLevel = None
     ipAddresses = []
+    error = None
 
 def xstr(s):
     return '' if s is None else str(s)
@@ -48,10 +54,31 @@ def get_threat_intel(query, api_key):
     Returns intelligence about the requested URL
 
     """
+    # initialize variables
+    intel = ThreatIntel
+    error = None
+
     url = 'https://threatexplorer.symantec.com/api/v1/url'
     params = dict(level='ADVANCED', url=query)
     headers = dict(Authorization=api_key)
     r = web.get(url, params, headers)
+
+    # check for return code errors
+    if r.status_code == 400:
+        error = Error(400,'Invalid input')
+
+    if r.status_code == 401:
+        error = Error(401,'API key invalid or not authorized')
+
+    if r.status_code == 429:
+        error = Error(429,'Daily lookup limit exceeded')
+
+    if r.status_code == 500:
+        error = Error(500,'Server error')
+
+    if error is not None:
+        intel.error = error
+        return intel
 
     # throw an error if request failed
     # Workflow will catch this and show it to the user
@@ -61,7 +88,6 @@ def get_threat_intel(query, api_key):
     result = r.json()
 
     # Create new intel object and extract the results
-    intel = ThreatIntel
     intel.url = URL(query,xstr(result['firstObserved']),xstr(result['lastObserved']),xstr(result['topSiteRank']))
 
     # Append categories
@@ -88,6 +114,7 @@ def main(wf):
 
     log.debug('Started')
 
+    # notifiy user if an update is availble
     if wf.update_available:
         wf.add_item('New version available',
                     'Install the update',
@@ -133,13 +160,6 @@ def main(wf):
 	    return 0
 
     query = args.query
-	
-    # TODO: Caching is not working (yet)
-    # def wrapper():
-    #     """ cached_data can only cache no args functions """
-    #     return get_threat_intel(query, api_key)
-
-    # intel = wf.cached_data('intel', wrapper, max_age=600)
 
     # validate input
     valid = False
@@ -151,6 +171,8 @@ def main(wf):
         valid = True
     if validators.ipv6(query):
         valid = True
+
+    # If the input is not valid, exit with a warning
     
     if not valid:
         wf.add_item('Enter valid URL, domain or IP',
@@ -162,6 +184,17 @@ def main(wf):
 
     intel = get_threat_intel(query, api_key)
 
+    # Exit with the error description if an error occurred
+
+    if not intel.error is None:
+        wf.add_item(intel.error.msg,
+                    'HTTP error code: ' + str(intel.error.code),
+                    valid=False,
+                    icon=ICON_WARNING)
+        wf.send_feedback()
+        return 0
+
+    # Add url and metdata
     wf.add_item(title=intel.url.url,
                 subtitle='First seen: ' + intel.url.firstObserved + 
                         ' Last seen: ' + intel.url.lastObserved +

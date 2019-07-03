@@ -211,7 +211,7 @@ def main(wf):
     wf.send_feedback()
 
 if __name__ == u"__main__":
-    wf = Workflow(libraries=['./lib'],update_settings={'github_slug': 'coolhva/alfred-symantec-threat-explorer'})
-    wf = Workflow()
+    wf = Workflow(libraries=['./lib'])
+    wf = Workflow(update_settings={'github_slug': 'coolhva/alfred-symantec-threat-explorer'})
     log = wf.logger
     sys.exit(wf.run(main))

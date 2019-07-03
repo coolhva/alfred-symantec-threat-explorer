@@ -1,5 +1,5 @@
 # Symantec Threat Explorer for Alfred
-This workflow shows Threat Intelligence about URL's by using the Symantec Threat Explorer API. A valid API key is needed for this workflow to function.
+This workflow shows Symantec Threat Intelligence about URL's by using the Symantec Threat Explorer API. A valid API key is needed for this workflow to function.
 
 1. Install the workflow (download is available in releases)
 

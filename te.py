@@ -159,7 +159,7 @@ def main(wf):
 	    wf.send_feedback()
 	    return 0
 
-    query = args.query
+    query = args.query.strip()
 
     # validate input
     valid = False

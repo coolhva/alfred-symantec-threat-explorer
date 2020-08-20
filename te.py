@@ -25,6 +25,10 @@ class RiskLevel:
 
 class GeoLocation:
     def __init__(self, countryCode, countryName):
+        if countryCode is None:
+            countryCode = 'Unknown'
+        if countryName is None:
+            countryName = 'Unknown'
         self.countryCode = countryCode
         self.countryName = countryName
 

@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>org.vanachterberg.tex</string>
-	<key>category</key>
-	<string>Internet</string>
 	<key>connections</key>
 	<dict>
 		<key>1B5D7B30-9CA4-436F-A4BF-0A9C9E0EF369</key>
@@ -86,7 +84,7 @@
 				<key>runningsubtext</key>
 				<string>Retrieving intel...</string>
 				<key>script</key>
-				<string>python te.py "$1"</string>
+				<string>python3 te.py "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -112,12 +110,14 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://threatexplorer.symantec.com/v2/tex#/url?q={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -155,7 +155,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>python te.py --setkey "{query}"</string>
+				<string>python3 te.py --setkey "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -199,43 +199,45 @@
 		<key>1B5D7B30-9CA4-436F-A4BF-0A9C9E0EF369</key>
 		<dict>
 			<key>xpos</key>
-			<integer>110</integer>
+			<real>110</real>
 			<key>ypos</key>
-			<integer>50</integer>
+			<real>50</real>
 		</dict>
 		<key>227954B4-54DB-477B-A091-F453F2CD21B5</key>
 		<dict>
 			<key>xpos</key>
-			<integer>115</integer>
+			<real>115</real>
 			<key>ypos</key>
-			<integer>195</integer>
+			<real>195</real>
 		</dict>
 		<key>302E5E52-3B2B-4774-9939-5E845F661ED8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>745</integer>
+			<real>745</real>
 			<key>ypos</key>
-			<integer>195</integer>
+			<real>195</real>
 		</dict>
 		<key>6C224CD3-E157-41A7-8C90-D3F9274C5EB8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>495</integer>
+			<real>495</real>
 			<key>ypos</key>
-			<integer>50</integer>
+			<real>50</real>
 		</dict>
 		<key>896B3179-A82F-4496-B0AD-A36368D13048</key>
 		<dict>
 			<key>xpos</key>
-			<integer>495</integer>
+			<real>495</real>
 			<key>ypos</key>
-			<integer>195</integer>
+			<real>195</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>0.2</string>
+	<string>0.5</string>
 	<key>webaddress</key>
 	<string>https://www.vanachterberg.org/</string>
 </dict>
